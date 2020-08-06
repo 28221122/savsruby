@@ -16,7 +16,7 @@ When(/^I input random user credentials in registration form$/) do
 end
 
 And(/^I click on the eye icons to reveal the passwords$/) do
-
+  @screens.registration_screen.password_visibility_button
 end
 
 And(/^I decline the exclusive offers$/) do
@@ -28,5 +28,5 @@ And(/^I submit the registration details$/) do
 end
 
 Then(/^the correct welcome message is displayed with my name$/) do
-  pending
+  @screens.registration_screen.get_welcome(@first_name)
 end

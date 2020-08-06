@@ -10,6 +10,9 @@ class RegistrationScreen
     @eye_icons = Elements.new(:xpath , '//android.widget.ImageButton[@content-desc="Show password"]')
     @register_button = Elements.new(:xpath , '//android.widget.Button[@text="REGISTER"]')
     @cancel_offer_button = Elements.new(:xpath,'//*[@resource-id="com.strawberrynetNew.android:id/btn_cancel"]')
+    @welcome_text = Elements.new(:xpath,'//*[@resource-id="com.strawberrynetNew.android:id/welcome_message"]')
+    @password_visibility_v1 = Elements.new(:xpath, '(//android.widget.ImageButton[@content-desc="Show password"])[1]')
+    @password_visibility_v2 = Elements.new(:xpath, '(//android.widget.ImageButton[@content-desc="Show password"])[2]')
   end
 
   def click_register_tab_button
@@ -20,11 +23,12 @@ class RegistrationScreen
     @register_button.text
   end
 
-  def verify_first_name(actual)
-    actual = @register_button.text
-    expected = "janis"
-    raise "User name is not the same: Expected #{expected} , Actual: #{actual}" unless actual == expected
-  end
+#  def verify_first_name(actual)
+#    actual = @register_button.text
+#    expected = "Welcome, #{actual}"
+#    raise "User name is not the same: Expected #{expected} , Actual: #{actual}" unless actual == expected
+#  end
+
   def click_cancel_offer_button
     @cancel_offer_button.click
   end
@@ -52,5 +56,18 @@ class RegistrationScreen
   def set_email(text)
     @email_field.set(text)
   end
+
+  def get_welcome(name)
+    actual = @welcome_text.get_text
+    expected = "Welcome, #{name}"
+    raise "User name is not the same: Expected #{expected} , Actual: #{name}" unless actual == expected
+  end
+
+  def password_visibility_button
+    @password_visibility_v1.click
+    sleep 3
+    @password_visibility_v2.click
+  end
+
 
 end
